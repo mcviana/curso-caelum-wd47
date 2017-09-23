@@ -31,12 +31,31 @@ function removeCartao(){
 
 }
 
+function editaCartao(){
+    var cartao = document.querySelector("#cartao_"+this.dataset.ref);
+    var cartao_edicao = "#cartao_"+this.dataset.ref;
+  
+    $("#novoCartao-conteudo").val($(cartao).text().replace(/\n/g,""));
+    
+    //alert (cartao_edicao);
+}
+
+// adicionando os listener clicks para os botões de remoção
 var botoes = document.querySelectorAll(".opcoesDoCartao-remove");
 
 for (var i=0; i < botoes.length; i++){
 
     //adiciona o evento em cada botao
     botoes[i].addEventListener("click", removeCartao);
+}
+
+// adicionando os listener clicks para os botões de edicao
+var botoes = document.querySelectorAll(".opcoesDoCartao-edita");
+
+for (var i=0; i < botoes.length; i++){
+
+    //adiciona o evento em cada botao
+    botoes[i].addEventListener("click", editaCartao);
 }
 
 //criando o contador
@@ -55,6 +74,10 @@ $(".novoCartao").submit(function(event){
                                 .replace("**","<b>");
 
     //cria os elementos do cartao e adiciona no DOM
+
+    /* Não consigo recuperar o id do cartão que estava sendo alterado
+    alert (cartao_edicao); */
+
     if (conteudo){
 
         //soma um no contador
@@ -63,12 +86,19 @@ $(".novoCartao").submit(function(event){
         //cria o botao de remover
         var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
                                         .attr("data-ref", contador)
-                                        .text("X")
+                                        .text("")
                                         .click(removeCartao);
+
+        //cria o botao de alteracao
+        var botaoEdita = $("<button>").addClass("opcoesDoCartao-edita")
+                                       .attr("data-ref", contador)
+                                       .text("")
+                                       .click(editaCartao);   
 
         //cria a div de opcoes
         var opcoes = $("<div>").addClass("opcoesDoCartao")
-                               .append(botaoRemove);
+                               .append(botaoRemove)
+                               .append(botaoEdita);
 
         //chamada para nova funcao
         var tipoCartao = decideTipoCartao(conteudo);

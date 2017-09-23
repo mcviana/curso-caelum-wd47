@@ -31,8 +31,12 @@
 
 .opcoesDoCartao-remove {
 	background-image: url("../img/close.svg");
+	width: 1.2em;
+	height: 1.2em;
 }
 
 .opcoesDoCartao-edita {
 	background-image: url("../img/edit.svg");
+	width: 1.2em;
+	height: 1.2em;
 }
